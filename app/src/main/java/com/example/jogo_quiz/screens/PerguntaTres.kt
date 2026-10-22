@@ -16,7 +16,9 @@ import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.livedata.observeAsState
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -37,6 +39,10 @@ fun PerguntaTres(
     alternativa : Int
 ) {
 
+
+    var buttonCorreto    by remember { mutableStateOf(Color.White) }
+    var buttonIncorreto by remember { mutableStateOf(Color.White) }
+
     Column(modifier = modifier
         .fillMaxSize()
         .background(Color(239, 151, 207))
@@ -45,7 +51,7 @@ fun PerguntaTres(
 
 
 
-        HeaderConcluido(3)
+        HeaderConcluido(alternativa)
 
         Card(
             modifier = Modifier
@@ -78,12 +84,14 @@ fun PerguntaTres(
                 Button(
                     onClick = {
                         navController.navigate("EndGame")
+                        buttonCorreto = (Color(136, 211, 165))
+                        buttonIncorreto = (Color(255, 141, 141, 255))
                     },
                     modifier = Modifier
                         .width(250.dp),
 
                     colors = ButtonDefaults.buttonColors(
-                        containerColor = Color.White
+                        containerColor = buttonIncorreto
                     ),
                     border = BorderStroke(2.dp, Color(220, 216, 216, 255))
 
@@ -96,12 +104,15 @@ fun PerguntaTres(
                 }
 
                 Button(
-                    onClick = {navController.navigate("EndGame")},
+                    onClick = {navController.navigate("EndGame")
+                        buttonCorreto = (Color(136, 211, 165))
+                        buttonIncorreto = (Color(255, 141, 141, 255))
+                              },
                     modifier = Modifier
                         .width(250.dp),
 
                     colors = ButtonDefaults.buttonColors(
-                        containerColor = Color.White
+                        containerColor = buttonIncorreto
                     ),
                     border = BorderStroke(2.dp, Color(220, 216, 216, 255))
 
@@ -116,13 +127,16 @@ fun PerguntaTres(
                     onClick = {navController.navigate("EndGame")
                         respostasViewModel.onPerguntaCorretaChanged(
                             (respostasViewModel.perguntaCorreta.value ?: 2) + 1
-                        ) },
+                        )
+                        buttonCorreto = (Color(136, 211, 165))
+                        buttonIncorreto = (Color(255, 141, 141, 255))
+                              },
 
                     modifier = Modifier
                         .width(250.dp),
 
                     colors = ButtonDefaults.buttonColors(
-                        containerColor = Color.White
+                        containerColor = buttonCorreto
                     ),
                     border = BorderStroke(2.dp, Color(220, 216, 216, 255))
 
@@ -134,12 +148,15 @@ fun PerguntaTres(
                 }
 
                 Button(
-                    onClick = {navController.navigate("EndGame")},
+                    onClick = {navController.navigate("EndGame")
+                        buttonCorreto = (Color(136, 211, 165))
+                        buttonIncorreto = (Color(255, 141, 141, 255))
+                              },
                     modifier = Modifier
                         .width(250.dp),
 
                     colors = ButtonDefaults.buttonColors(
-                        containerColor = Color.White
+                        containerColor = buttonIncorreto
                     ),
                     border = BorderStroke(2.dp, Color(220, 216, 216, 255))
 

@@ -16,7 +16,6 @@ import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
@@ -34,14 +33,14 @@ import com.example.jogo_quiz.screens.respostas.RespostasViewModel
 
 @Composable
 fun PerguntaUm(
-        modifier: Modifier = Modifier,
-        navController: NavController,
-        respostasViewModel: RespostasViewModel
+    modifier: Modifier = Modifier,
+    navController: NavController,
+    respostasViewModel: RespostasViewModel
 ) {
 
 
-
-    var backgroundButton by remember { mutableStateOf(Color.White) }
+    var buttonCorreto    by remember { mutableStateOf(Color.White) }
+    var buttonIncorreto by remember { mutableStateOf(Color.White) }
 
 
     Column(modifier = modifier
@@ -83,12 +82,14 @@ fun PerguntaUm(
                 Button(
                     onClick = {
                         navController.navigate("perguntaDois")
+                        buttonCorreto = (Color(136, 211, 165))
+                        buttonIncorreto = (Color(255, 141, 141, 255))
                     },
                     modifier = Modifier
                         .width(250.dp),
 
                     colors = ButtonDefaults.buttonColors(
-                        containerColor = backgroundButton
+                        containerColor = buttonIncorreto
                     ),
                     border = BorderStroke(2.dp, Color(220, 216, 216, 255))
 
@@ -101,12 +102,16 @@ fun PerguntaUm(
                 }
 
                 Button(
-                    onClick = {navController.navigate("perguntaDois")},
+                    onClick = {navController.navigate("perguntaDois")
+                        buttonCorreto = (Color(136, 211, 165))
+                        buttonIncorreto = (Color(255, 141, 141, 255))
+
+                              },
                     modifier = Modifier
                         .width(250.dp),
 
                     colors = ButtonDefaults.buttonColors(
-                        containerColor = backgroundButton
+                        containerColor = buttonIncorreto
                     ),
                     border = BorderStroke(2.dp, Color(220, 216, 216, 255))
 
@@ -118,18 +123,22 @@ fun PerguntaUm(
                 }
 
                 Button(
-                    onClick = {navController.navigate("perguntaDois")
+                    onClick = {
+
+                        navController.navigate("perguntaDois")
+
                         respostasViewModel.onPerguntaCorretaChanged(
                             (respostasViewModel.perguntaCorreta.value ?: 0) + 1
                         )
-                        backgroundButton = (Color(136, 211, 165))
 
+                        buttonCorreto = (Color(136, 211, 165))
+                        buttonIncorreto = (Color(255, 141, 141, 255))
                               },
                     modifier = Modifier
                         .width(250.dp),
 
                     colors = ButtonDefaults.buttonColors(
-                        containerColor = backgroundButton
+                        containerColor = buttonCorreto
                     ),
                     border = BorderStroke(2.dp, Color(220, 216, 216, 255))
 
@@ -141,12 +150,16 @@ fun PerguntaUm(
                 }
 
                 Button(
-                    onClick = {navController.navigate("perguntaDois")},
+                    onClick = {
+                        navController.navigate("perguntaDois")
+                        buttonCorreto = (Color(136, 211, 165))
+                        buttonIncorreto = (Color(255, 141, 141, 255))
+                              },
                     modifier = Modifier
                         .width(250.dp),
 
                     colors = ButtonDefaults.buttonColors(
-                        containerColor = backgroundButton
+                        containerColor = buttonIncorreto
                     ),
                     border = BorderStroke(2.dp, Color(220, 216, 216, 255))
 

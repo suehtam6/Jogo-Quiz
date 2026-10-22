@@ -21,7 +21,7 @@ import com.example.jogo_quiz.R
 
 @Composable
 fun HeaderConcluido(
-    pergunta : Int
+    pergunta: Int,
 ) {
 
 
@@ -41,6 +41,7 @@ fun HeaderConcluido(
             contentDescription = "Icon quiz",
             modifier = Modifier.height(90.dp)
         )
+
 
         Box(modifier = Modifier.fillMaxWidth()
             .height(50.dp)
