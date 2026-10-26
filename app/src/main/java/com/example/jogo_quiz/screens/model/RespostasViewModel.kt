@@ -1,4 +1,4 @@
-package com.example.jogo_quiz.screens.respostas
+package com.example.jogo_quiz.screens.model
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

@@ -27,8 +27,8 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
-import com.example.jogo_quiz.screens.respostas.HeaderConcluido
-import com.example.jogo_quiz.screens.respostas.RespostasViewModel
+import com.example.jogo_quiz.screens.model.HeaderConcluido
+import com.example.jogo_quiz.screens.model.RespostasViewModel
 
 
 @Composable

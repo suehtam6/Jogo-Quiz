@@ -1,4 +1,4 @@
-package com.example.jogo_quiz.screens.respostas
+package com.example.jogo_quiz.screens.model
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background

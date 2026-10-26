@@ -1,5 +1,7 @@
 package com.example.jogo_quiz.screens
 
+import android.R
+import android.R.attr.text
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -27,155 +29,239 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
-import com.example.jogo_quiz.screens.respostas.HeaderConcluido
-import com.example.jogo_quiz.screens.respostas.RespostasViewModel
+import com.example.jogo_quiz.screens.model.HeaderConcluido
+import com.example.jogo_quiz.screens.model.RespostasViewModel
+
+
+
+data class Option (
+    val text: String = "",
+    val isCorrect: Boolean = false
+)
+
+data class Question(
+    val statement: String = "",
+    val options: List<Option> = listOf()
+)
+
+//@Composable
+//fun PerguntaUm(
+//    modifier: Modifier = Modifier,
+//    navController: NavController,
+//    respostasViewModel: RespostasViewModel
+//) {
+//
+//
+//
+//    var buttonCorreto    by remember { mutableStateOf(Color.White) }
+//    var buttonIncorreto by remember { mutableStateOf(Color.White) }
+//
+//
+//    Column(modifier = modifier
+//        .fillMaxSize()
+//        .background(Color(239, 151, 207))
+//
+//    ) {
+//
+//        HeaderConcluido(1)
+//
+//        Card(
+//            modifier = Modifier
+//                .fillMaxWidth()
+//                .height(300.dp)
+//                .padding(20.dp),
+//            colors = CardDefaults.cardColors(
+//                containerColor = Color(0xFFF9F6F6)
+//            ),
+//            elevation = CardDefaults.cardElevation(4.dp),
+//
+//        ) {
+//
+//            Column(modifier = Modifier
+//                .fillMaxSize(),
+//                horizontalAlignment = Alignment.CenterHorizontally,
+//                verticalArrangement = Arrangement.SpaceEvenly
+//
+//
+//            ) {
+//                Text(
+//                    text = "Qual é a capital da França?",
+//                    textAlign = TextAlign.Center,
+//                    fontSize = 20.sp,
+//                    fontWeight = FontWeight.Bold
+//
+//
+//                )
+//
+//                Button(
+//                    onClick = {
+//                        navController.navigate("perguntaDois")
+//                        buttonCorreto = (Color(136, 211, 165))
+//                        buttonIncorreto = (Color(255, 141, 141, 255))
+//                    },
+//                    modifier = Modifier
+//                        .width(250.dp),
+//
+//                    colors = ButtonDefaults.buttonColors(
+//                        containerColor = buttonIncorreto
+//                    ),
+//                    border = BorderStroke(2.dp, Color(220, 216, 216, 255))
+//
+//                ) {
+//                    Text(
+//                        text = "Londres",
+//                        color = Color.Black
+//                    )
+//
+//                }
+//
+//                Button(
+//                    onClick = {navController.navigate("perguntaDois")
+//                        buttonCorreto = (Color(136, 211, 165))
+//                        buttonIncorreto = (Color(255, 141, 141, 255))
+//
+//                              },
+//                    modifier = Modifier
+//                        .width(250.dp),
+//
+//                    colors = ButtonDefaults.buttonColors(
+//                        containerColor = buttonIncorreto
+//                    ),
+//                    border = BorderStroke(2.dp, Color(220, 216, 216, 255))
+//
+//                ) {
+//                    Text(
+//                        text = "Berlim",
+//                        color = Color.Black
+//                    )
+//                }
+//
+//                Button(
+//                    onClick = {
+//
+//                        navController.navigate("perguntaDois")
+//
+//                        respostasViewModel.onPerguntaCorretaChanged(
+//                            (respostasViewModel.perguntaCorreta.value ?: 0) + 1
+//                        )
+//
+//                        buttonCorreto = (Color(136, 211, 165))
+//                        buttonIncorreto = (Color(255, 141, 141, 255))
+//                              },
+//                    modifier = Modifier
+//                        .width(250.dp),
+//
+//                    colors = ButtonDefaults.buttonColors(
+//                        containerColor = buttonCorreto
+//                    ),
+//                    border = BorderStroke(2.dp, Color(220, 216, 216, 255))
+//
+//                ) {
+//                    Text(
+//                        text = "Paris",
+//                        color = Color.Black
+//                    )
+//                }
+//
+//                Button(
+//                    onClick = {
+//                        navController.navigate("perguntaDois")
+//                        buttonCorreto = (Color(136, 211, 165))
+//                        buttonIncorreto = (Color(255, 141, 141, 255))
+//                              },
+//                    modifier = Modifier
+//                        .width(250.dp),
+//
+//                    colors = ButtonDefaults.buttonColors(
+//                        containerColor = buttonIncorreto
+//                    ),
+//                    border = BorderStroke(2.dp, Color(220, 216, 216, 255))
+//
+//                ) {
+//                    Text(
+//                        text = "Madri",
+//                        color = Color.Black
+//                    )
+//                }
+//
+//
+//            }
+//
+//        }
+//
+//    }
+//
+//
+//}
 
 
 @Composable
-fun PerguntaUm(
+fun questionScreen(
     modifier: Modifier = Modifier,
-    navController: NavController,
-    respostasViewModel: RespostasViewModel
+    navController: NavController
+
 ) {
 
 
-    var buttonCorreto    by remember { mutableStateOf(Color.White) }
-    var buttonIncorreto by remember { mutableStateOf(Color.White) }
+    val perguntas = listOf(
+        Question(
+            statement = "Qual a capital da frança?",
+            options = listOf(
+                Option(
+                    text = "Paris",
+                    isCorrect = true
+                ),
 
+                Option(
+                    text = "São Paulo",
+                    isCorrect = false
+                ),
 
-    Column(modifier = modifier
-        .fillMaxSize()
-        .background(Color(239, 151, 207))
+                Option(
+                    text = "Madri",
+                    isCorrect = false
+                ),
 
-    ) {
-
-        HeaderConcluido(1)
-
-        Card(
-            modifier = Modifier
-                .fillMaxWidth()
-                .height(300.dp)
-                .padding(20.dp),
-            colors = CardDefaults.cardColors(
-                containerColor = Color(0xFFF9F6F6)
-            ),
-            elevation = CardDefaults.cardElevation(4.dp),
-
-        ) {
-
-            Column(modifier = Modifier
-                .fillMaxSize(),
-                horizontalAlignment = Alignment.CenterHorizontally,
-                verticalArrangement = Arrangement.SpaceEvenly
-
-
-            ) {
-                Text(
-                    text = "Qual é a capital da França?",
-                    textAlign = TextAlign.Center,
-                    fontSize = 20.sp,
-                    fontWeight = FontWeight.Bold
-
-
+                Option(
+                    text = "Rio de Janeiro",
+                    isCorrect = false
                 )
 
-                Button(
-                    onClick = {
-                        navController.navigate("perguntaDois")
-                        buttonCorreto = (Color(136, 211, 165))
-                        buttonIncorreto = (Color(255, 141, 141, 255))
-                    },
-                    modifier = Modifier
-                        .width(250.dp),
-
-                    colors = ButtonDefaults.buttonColors(
-                        containerColor = buttonIncorreto
-                    ),
-                    border = BorderStroke(2.dp, Color(220, 216, 216, 255))
-
-                ) {
-                    Text(
-                        text = "Londres",
-                        color = Color.Black
-                    )
-
-                }
-
-                Button(
-                    onClick = {navController.navigate("perguntaDois")
-                        buttonCorreto = (Color(136, 211, 165))
-                        buttonIncorreto = (Color(255, 141, 141, 255))
-
-                              },
-                    modifier = Modifier
-                        .width(250.dp),
-
-                    colors = ButtonDefaults.buttonColors(
-                        containerColor = buttonIncorreto
-                    ),
-                    border = BorderStroke(2.dp, Color(220, 216, 216, 255))
-
-                ) {
-                    Text(
-                        text = "Berlim",
-                        color = Color.Black
-                    )
-                }
-
-                Button(
-                    onClick = {
-
-                        navController.navigate("perguntaDois")
-
-                        respostasViewModel.onPerguntaCorretaChanged(
-                            (respostasViewModel.perguntaCorreta.value ?: 0) + 1
-                        )
-
-                        buttonCorreto = (Color(136, 211, 165))
-                        buttonIncorreto = (Color(255, 141, 141, 255))
-                              },
-                    modifier = Modifier
-                        .width(250.dp),
-
-                    colors = ButtonDefaults.buttonColors(
-                        containerColor = buttonCorreto
-                    ),
-                    border = BorderStroke(2.dp, Color(220, 216, 216, 255))
-
-                ) {
-                    Text(
-                        text = "Paris",
-                        color = Color.Black
-                    )
-                }
-
-                Button(
-                    onClick = {
-                        navController.navigate("perguntaDois")
-                        buttonCorreto = (Color(136, 211, 165))
-                        buttonIncorreto = (Color(255, 141, 141, 255))
-                              },
-                    modifier = Modifier
-                        .width(250.dp),
-
-                    colors = ButtonDefaults.buttonColors(
-                        containerColor = buttonIncorreto
-                    ),
-                    border = BorderStroke(2.dp, Color(220, 216, 216, 255))
-
-                ) {
-                    Text(
-                        text = "Madri",
-                        color = Color.Black
-                    )
-                }
 
 
-            }
 
+
+
+            )
+        )
+    )
+
+}
+
+
+// Criando cards automaticos
+@Composable
+fun QuestionCard(
+    modifier: Modifier = Modifier,
+    question: Question
+) {
+
+
+    Column(modifier) {
+        Text(question.statement)
+
+        question.options.map{option ->
+
+            val optionColor = if(option.isCorrect) Color.Green else Color.Red
+            Text(
+                text = option.text,
+                color = optionColor
+
+            )
         }
 
     }
+
 
 
 }

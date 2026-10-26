@@ -15,14 +15,12 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import androidx.navigation.navArgument
 import com.example.jogo_quiz.screens.EndGame
 import com.example.jogo_quiz.screens.PerguntaDois
 import com.example.jogo_quiz.screens.PerguntaTres
 import com.example.jogo_quiz.screens.StartPreview
-import com.example.jogo_quiz.screens.PerguntaUm
-import com.example.jogo_quiz.screens.respostas.HeaderConcluido
-import com.example.jogo_quiz.screens.respostas.RespostasViewModel
+import com.example.jogo_quiz.screens.model.RespostasViewModel
+import com.example.jogo_quiz.screens.questionScreen
 import com.example.jogo_quiz.ui.theme.JogoquizTheme
 
 
@@ -78,10 +76,9 @@ class MainActivity : ComponentActivity() {
                         composable(route = "perguntaUm"
                         ) {
 
-                            PerguntaUm(
+                            questionScreen(
                                 modifier = Modifier.padding(innerPadding),
-                                navController = navController,
-                                respostasViewModel = respostasViewModel
+                                navController = navController
                             )
                         }
 
